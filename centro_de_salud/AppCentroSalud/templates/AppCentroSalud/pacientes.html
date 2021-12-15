@@ -4,4 +4,12 @@
 
     <h1> esta es la pagina de pacientes </h1>
 
+    <form action="{% url 'Pacientes' %}" method="POST">{% csrf_token %}
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+        <input type="submit" value="Enviar">
+    
+    </form>
+
 {% endblock %}
