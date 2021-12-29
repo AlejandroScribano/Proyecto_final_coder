@@ -14,80 +14,42 @@
 		<link rel="shortcut icon" href="{% static 'AppCentroSalud/assets/images/logo/favicon.png' %}" type="image/x-icon" />
 
 		<!-- CSS Files -->
-		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/animate-3.7.0.css' %}" />
-		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/font-awesome-4.7.0.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/bootstrap-4.1.3.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/owl-carousel.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/jquery.datetimepicker.min.css' %}" />
-		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/linearicons.css' %}" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+			integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+			crossorigin="anonymous"
+		/>
+
+		<script src="https://use.fontawesome.com/d4d9d91635.js"></script>
+
+		<!-- Animate -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 		<link rel="stylesheet" href="{% static 'AppCentroSalud/assets/css/style.css' %}" />
 	</head>
 	<body>
-		<!-- Preloader Starts -->
-		<div class="preloader">
-			<div class="spinner"></div>
-		</div>
-		<!-- Preloader End -->
-
 		<!-- Header Area Starts -->
-		<header class="header-area">
-			<div class="header-top">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-9 d-md-flex">
-							<h6 class="mr-3">
-								<span class="mr-2"><i class="fa fa-mobile"></i></span> call us now! +1 305 708 2563
-							</h6>
-							<h6 class="mr-3">
-								<span class="mr-2"><i class="fa fa-envelope-o"></i></span> medical@example.com
-							</h6>
-							<h6>
-								<span class="mr-2"><i class="fa fa-map-marker"></i></span> Find our Location
-							</h6>
-						</div>
-						<div class="col-lg-3">
-							<div class="social-links">
-								<ul>
-									<li>
-										<a href="#"><i class="fa fa-facebook"></i></a>
-									</li>
-									<li>
-										<a href="#"><i class="fa fa-linkedin"></i></a>
-									</li>
-									<li>
-										<a href="#"><i class="fa fa-twitter"></i></a>
-									</li>
-									<li>
-										<a href="#"><i class="fa fa-instagram"></i></a>
-									</li>
-									<li>
-										<a href="#"><i class="fa fa-vimeo"></i></a>
-									</li>
-								</ul>
-							</div>
-						</div>
+
+		<div id="header" id="home">
+			<div class="container">
+				<div class="row align-items-center justify-content-between d-flex">
+					<div id="logo col-3">
+						<a href="{% url 'Inicio' %}"><img src="{% static 'AppCentroSalud/assets/images/logo/logo.png' %}" alt="" title="" /></a>
 					</div>
-				</div>
-			</div>
-			<div id="header" id="home">
-				<div class="container">
-					<div class="row align-items-center justify-content-between d-flex">
-						<div id="logo">
-							<a href="{% url 'Inicio' %}"><img src="{% static 'AppCentroSalud/assets/images/logo/logo.png' %}" alt="" title="" /></a>
-						</div>
-						<nav id="nav-menu-container">
-							<ul class="nav-menu">
-								<li class="menu-active"><a href="#">Home</a></li>
-								<li><a href="{% url 'Doctores' %}">Cuerpo Médico</a></li>
-								<li><a href="{% url 'Pacientes' %}">Pacientes</a></li>
-								<li><a href="{% url 'Consultas' %}">Consulta</a></li>
-							</ul>
+					<div class="col-9 bg--black">
+						<nav class="nav d-flex justify-content-between w-100 p-2 m-2">
+							<a href="{% url 'Inicio' %}">Home</a>
+							<a class="text-decoration-none pl-1" href="{% url 'Doctores' %}">Cuerpo Médico</a>
+							<a class="text-decoration-none pl-1" href="{% url 'Pacientes' %}">Pacientes</a>
+							<a class="text-decoration-none pl-1" href="{% url 'Consultas' %}">Consulta</a>
+							<a class="text-decoration-none pl-1" href="{% url 'Acerca' %}">Acerca</a>
 						</nav>
-						<!-- #nav-menu-container -->
 					</div>
 				</div>
 			</div>
-		</header>
+		</div>
+
 		<!-- Header Area End -->
 
 		<!-- Banner Area Starts -->
@@ -101,7 +63,7 @@
 		<!-- Banner Area End -->
 
 		<!-- Footer Area Starts -->
-		<footer class="footer-area section-padding2 ">
+		<footer class="footer-area p-2">
 			<div class="footer-copyright">
 				<div class="container">
 					<div class="row">
@@ -130,13 +92,16 @@
 		<!-- Footer Area End -->
 
 		<!-- Javascript -->
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/bootstrap-4.1.3.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/wow.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/owl-carousel.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/jquery.datetimepicker.full.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/jquery.nice-select.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/vendor/superfish.min.js' %}"></script>
-		<script src="{% static 'AppCentroSalud/assets/js/main.js' %}"></script>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+			crossorigin="anonymous"
+		></script>
 	</body>
 </html>

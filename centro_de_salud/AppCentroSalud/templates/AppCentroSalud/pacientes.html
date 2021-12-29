@@ -1,15 +1,43 @@
-{% extends 'AppCentroSalud/padre.html' %}
-{% load static %}
-{% block contenidoQueCambia %}
+{% extends 'AppCentroSalud/padre.html' %} {% load static %} {% block contenidoQueCambia %}
 
-    <h1> esta es la pagina de pacientes </h1>
+<h1>Pacientes</h1>
 
-    <form action="{% url 'Pacientes' %}" method="POST">{% csrf_token %}
-        <table>
+<form action="{% url 'Pacientes' %}" method="POST">
+	{% csrf_token %}
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="inputNombre">Nombre</label>
+			<input type="email" class="form-control" id="inputNombre" required />
+		</div>
+		<div class="form-group col-md-6">
+			<label for="inputApellido">Apellido</label>
+			<input type="text" class="form-control" id="inputApellido" required />
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="inputDocumento">Documento</label>
+			<input type="text" class="form-control" id="inputDocumento" placeholder="123456789" required />
+		</div>
+		<div class="form-group col-md-8">
+			<label for="inputEmail">E-Mail</label>
+			<input type="email" class="form-control" id="inputEmail" placeholder="algunemail@algunproveedor.com" required />
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="inputCity">Telefono</label>
+			<input type="text" class="form-control" id="inputTelefono" />
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Agregar</button>
+
+	<!-- <table>
             {{ miFormulario.as_table }}
         </table>
-        <input type="submit" value="Enviar">
-    
-    </form>
+        <input type="submit" value="Enviar"> -->
+</form>
 
 {% endblock %}

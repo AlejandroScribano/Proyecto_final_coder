@@ -13,4 +13,7 @@ urlpatterns = [
     #path consultas
     path('consultas',views.consultas, name="Consultas"),
 
+    #path Acerca de Nosotros
+    path('acerca',views.acerca, name="Acerca"),
+
 ]
