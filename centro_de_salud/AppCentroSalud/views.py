@@ -10,8 +10,8 @@ def inicio(request):
     return render(request, "AppCentroSalud/index.html")
     #return HttpResponse('Vista de inicio')
 
-def doctores(request):
-    return render(request, "AppCentroSalud/doctores.html")
+#def doctores(request):
+#    return render(request, "AppCentroSalud/doctores.html")
 
 def doctores(request):
 
