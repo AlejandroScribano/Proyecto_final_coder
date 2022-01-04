@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-class Persona (models.Model):
+class Persona(models.Model):
  nombre = models.CharField(max_length=30)
  apellido = models.CharField(max_length=30)
  documento = models.IntegerField(blank=True, null=True)
@@ -11,18 +11,17 @@ class Persona (models.Model):
  telefono = models.CharField(max_length=15)
  
 class Medico(models.Model):
- idPersona = models.IntegerField(blank=True, null=True)
- idEspecialidad = models.CharField(max_length=10)
-
-
-class Especialidad(models.Model):
- nombreEspecialidad = models.CharField(max_length=10)
-
-class Pacientes(models.Model):
- idPersona = models.IntegerField(blank=True, null=True)
+ nombre = models.CharField(max_length=35)
+ apellido = models.CharField(max_length=30)
+ documento = models.IntegerField(blank=True, null=True)
+ email = models.EmailField()
+ telefono = models.CharField(max_length=15)
+ especialidad = models.CharField(max_length=15)
 
 class Consulta(models.Model):
- idPaciente = models.IntegerField(blank=True, null=True)
- idMedico = models.IntegerField(blank=True, null=True)
- consulta_paciente = models.CharField(max_length=150)
+  nombre = models.CharField(max_length=30)
+  apellido = models.CharField(max_length=30)
+  email = models.EmailField()
+  telefono = models.CharField(max_length=15)
+  consulta_paciente = models.CharField(max_length=130)
 
