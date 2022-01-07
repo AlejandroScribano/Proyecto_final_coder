@@ -16,4 +16,10 @@ urlpatterns = [
     #path Acerca de Nosotros
     path('acerca',views.acerca, name="Acerca"),
 
+    #path para Login
+    path('login', views.login_request, name='Login'),
+
+    #path para registro
+    path('register', views.register, name='Register'),
+
 ]
