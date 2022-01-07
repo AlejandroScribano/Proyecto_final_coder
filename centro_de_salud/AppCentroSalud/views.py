@@ -4,12 +4,18 @@ from django.db.models.enums import IntegerChoices
 from django.shortcuts import render
 #para el Login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth import login,logout,authenticate, update_session_auth_hash
 
-#from AppCentroSalud.models import CuerpoMedico, Pacientes, Consulta
-#from AppCentroSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario
+#para decorador
+from django.contrib.auth.decorators import login_required
+
+
+#from AppCentroSalud.models import CuerpoMedico, Pacientes, Consulta,
+from AppCentroSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario, UserRegisterForm, UserEditForm
 
 # Create your views here.
+
+
 def inicio(request):
     return render(request, "AppCentroSalud/index.html")
     #return HttpResponse('Vista de inicio')
@@ -130,12 +136,33 @@ def login_request(request):
 #Registro
 
 def register(request):
-    form = UserCreationForm(request.POST)
+    #form = UserCreationForm(request.POST)
+    form = UserRegisterForm(request.POST)
     if form.is_valid():
         username = form.cleaned_data['username']
         form.save()
         return render(request, "AppCentroSalud/index.html", {"mensaje": "Usuario creado."})
     else:
-        form = UserCreationForm()
+        #form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, "AppCentroSalud/register.html", {"form":form})
 
+#Edición de usuario
+
+@login_required
+def editarUsuario(request):
+    usuario = request.user
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+
+            return render(request, 'AppCentroSalud/index.html')
+    else:
+        miFormulario = UserEditForm(initial={'email':usuario.email})
+        return render(request, 'AppCentroSalud/editarUsuario.html', {"miFormulario":miFormulario,"usuario":usuario})
