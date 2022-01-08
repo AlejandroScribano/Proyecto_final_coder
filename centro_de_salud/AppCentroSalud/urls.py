@@ -25,7 +25,7 @@ urlpatterns = [
     path('register', views.register, name='Register'),
 
     #path para el logout
-    path('logout', LogoutView.as_view(template_name = 'AppCentroSalud/logout.html')),
+    path('logout', LogoutView.as_view(template_name = 'AppCentroSalud/logout.html'), name='Logout'),
 
     #path para editar usuario
     path('editarUsuario', views.editarUsuario, name='EditarUsuario'),
