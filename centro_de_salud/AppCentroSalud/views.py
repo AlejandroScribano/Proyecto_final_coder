@@ -10,14 +10,26 @@ from django.contrib.auth import login,logout,authenticate, update_session_auth_h
 from django.contrib.auth.decorators import login_required
 
 
-#from AppCentroSalud.models import CuerpoMedico, Pacientes, Consulta,
+from AppCentroSalud.models import Medico, Persona, Consulta, Avatar
 from AppCentroSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario, UserRegisterForm, UserEditForm
 
 # Create your views here.
 
 
 def inicio(request):
-    return render(request, "AppCentroSalud/index.html")
+    #Para mostar avatar
+    diccionario = {}
+    cantidadAvatares = 0
+    if request.user.is_authenticated:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        for a in avatar:
+            cantidadAvatares = cantidadAvatares + 1
+        if cantidadAvatares > 0:
+            diccionario["avatar"] = avatar[cantidadAvatares-1].imagen.url
+
+        #diccionario["avatar"] = avatar[cantidadAvatares-1].imagen.url
+
+    return render(request, "AppCentroSalud/index.html", diccionario)
     #return HttpResponse('Vista de inicio')
 
 #def doctores(request):
@@ -106,7 +118,17 @@ def consultas(request):
 
 #acerca
 def acerca(request):
-    return render(request, "AppCentroSalud/acerca.html")
+    #Para mostar avatar
+    diccionario = {}
+    cantidadAvatares = 0
+    if request.user.is_authenticated:
+        avatar = Avatar.objects.filter(user = request.user.id)
+        for a in avatar:
+            cantidadAvatares = cantidadAvatares + 1
+        if cantidadAvatares > 0:
+            diccionario["avatar"] = avatar[cantidadAvatares-1].imagen.url
+
+    return render(request, "AppCentroSalud/acerca.html", diccionario)
 
 #Login
 def login_request(request):
@@ -165,4 +187,21 @@ def editarUsuario(request):
             return render(request, 'AppCentroSalud/index.html')
     else:
         miFormulario = UserEditForm(initial={'email':usuario.email})
-        return render(request, 'AppCentroSalud/editarUsuario.html', {"miFormulario":miFormulario,"usuario":usuario})
+
+        diccionario = {}
+        diccionario["miFormulario"] = miFormulario
+        diccionario["usuario"] = usuario
+        #Para mostar avatar
+        
+        cantidadAvatares = 0
+        if request.user.is_authenticated:
+            avatar = Avatar.objects.filter(user = request.user.id)
+            for a in avatar:
+                cantidadAvatares = cantidadAvatares + 1
+            if cantidadAvatares > 0:
+                diccionario["avatar"] = avatar[cantidadAvatares-1].imagen.url
+                  
+            
+
+        return render(request, 'AppCentroSalud/editarUsuario.html',diccionario)
+        #return render(request, 'AppCentroSalud/editarUsuario.html', {"miFormulario":miFormulario,"usuario":usuario, "avatar" : avatar[cantidadAvatares-1].imagen.url })

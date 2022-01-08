@@ -1,5 +1,8 @@
 from django.db import models
 
+#para el avatar
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -25,3 +28,10 @@ class Consulta(models.Model):
   telefono = models.CharField(max_length=15)
   consulta_paciente = models.CharField(max_length=130)
 
+#Para el Avatar
+
+class Avatar(models.Model):
+  #vinculo con el usuario
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  #subcarpeta avatares de media
+  imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
