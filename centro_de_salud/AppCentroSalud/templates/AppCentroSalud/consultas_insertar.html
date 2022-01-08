@@ -1,0 +1,43 @@
+{% extends 'AppCentroSalud/padre.html' %} {% load static %} {% block contenidoQueCambia %}
+
+<h1>Consultas</h1>
+<br />
+<form action="{% url 'consultasInsertar' %}" method="POST">
+	{% csrf_token %}
+
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="inputNombre">Nombre</label>
+			<input type="text" class="form-control" id="inputNombre" name="inputNombre" required />
+		</div>
+		<div class="form-group col-md-6">
+			<label for="inputApellido">Apellido</label>
+			<input type="text" class="form-control" id="inputApellido" name="inputApellido" required />
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="inputTelefono">Telefono</label>
+			<input type="text" class="form-control" id="inputTelefono" name="inputTelefono" />
+		</div>
+		<div class="form-group col-md-8">
+			<label for="inputEmail">E-Mail</label>
+			<input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="algunemail@algunproveedor.com" required />
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-12">
+			<label for="textareaConsulta">Consulta</label>
+			<textarea class="form-control" rows="10" id="textareaConsulta" name="textareaConsulta" placeholder="Escriba su consulta Aqui"></textarea>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Agregar</button>
+	<!-- <table>
+		{{ miFormulario.as_table }}
+	</table>
+	<input type="submit" value="Enviar" /> -->
+</form>
+
+{% endblock %}

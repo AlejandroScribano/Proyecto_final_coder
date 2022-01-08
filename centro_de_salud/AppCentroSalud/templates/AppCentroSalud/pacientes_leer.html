@@ -1,0 +1,17 @@
+{% extends 'AppCentroSalud/padre.html' %} {% load static %} {% block contenidoQueCambia %}
+
+<h1>Leer Pacientes</h1>
+<div class="container">
+	{% for f in pacientesInst %}
+	<div class="row mt-3">
+		<p>{{f}}</p>
+		<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="{% url 'pacientesEliminar' f.documento %}">Eliminar Paciente</a>
+	</div>
+
+	{% endfor %}
+	<div class="row mt-3">
+		<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="{% url 'pacientesInsertar' %}">Insertar Pacientes</a>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,9 +1,8 @@
-
+# 
 from django import forms
 from django.db.models.enums import IntegerChoices
 from django.shortcuts import render
-#from AppCentroSalud.models import CuerpoMedico, Pacientes, Consulta
-#from AppCentroSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario
+from AppCentroSalud.models import Persona, Medico, Consulta
 
 # Create your views here.
 def inicio(request):
@@ -13,86 +12,143 @@ def inicio(request):
 #def doctores(request):
 #    return render(request, "AppCentroSalud/doctores.html")
 
-def doctores(request):
+def doctores_insertar(request):
 
-    # if request.method == "POST":
+    if request.method == "POST":
+        doctoresInst =Medico (nombre = request.POST['inputNombre'],
+            apellido = request.POST['inputApellido'],
+            documento = request.POST['inputDocumento'],
+            email = request.POST['inputEmail'],
+            telefono = request.POST['inputTelefono'],
+            especialidad = request.POST['selectEspecialidad'])
+        doctoresInst.save()
+        return render(request, "AppCentroSalud/doctores_insertar.html")
 
-    #     miFormulario = CuerpoMedicoFormulario(request.POST)
+    return render(request, 'AppCentroSalud/doctores_insertar.html')
 
-    #     if miFormulario.is_valid():
-    #         informacion = miFormulario.cleaned_data
-            
-    #         datos = CuerpoMedico(
-    #             nombre = informacion["nombre"],
-    #             apellido = informacion["apellido"],
-    #             especialidad = informacion["especialidad"],
-    #             dia_hora_atencion = informacion["dia_hora_atencion"],
-    #             email = informacion["email"],
-    #             telefono = informacion["telefono"]
-    #         )
-    #         datos.save()
-    #         return render(request, "AppCentroSalud/doctores.html")
-            
-            
-    # else:
-    #     miFormulario = CuerpoMedicoFormulario()
-    #     return render(request, 'AppCentroSalud/doctores.html',{"miFormulario":miFormulario})
-    return render(request, 'AppCentroSalud/doctores.html')
+def doctores_eliminar(request, id_para_eliminar):
 
+    doctorEliminar = Medico.objects.get(documento=id_para_eliminar)
+    doctorEliminar.delete()
+    doctoresInst = Medico.objects.all()
+
+    dir = {"doctoresInst": doctoresInst}
+
+    return render(request, 'AppCentroSalud/doctores_leer.html',dir)
+
+def doctores_modificar(request):
+    return render(request, 'AppCentroSalud/doctores_modificar.html')
+
+def doctores_leer(request):
+
+    doctoresInst = Medico.objects.all()
+
+    dir = {"doctoresInst": doctoresInst}
+
+    return render(request, 'AppCentroSalud/doctores_leer.html',dir)
+
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+#    
+def pacientes_insertar(request):
+
+    if request.method == "POST":
+        personaInst =Persona (nombre = request.POST['inputNombre'],
+            apellido = request.POST['inputApellido'],
+            documento = request.POST['inputDocumento'],
+            email = request.POST['inputEmail'],
+            telefono = request.POST['inputTelefono'])
+        personaInst.save()
+        return render(request, "AppCentroSalud/pacientes_insertar.html")
+
+    return render(request, 'AppCentroSalud/pacientes_insertar.html')
+
+def pacientes_eliminar(request, id_para_eliminar):
+    pacienteEliminar = Persona.objects.get(documento=id_para_eliminar)
+    pacienteEliminar.delete()
+    pacientesInst = Persona.objects.all()
+
+    dir = {"pacientesInst": pacientesInst}
+
+    return render(request, 'AppCentroSalud/pacientes_leer.html',dir)
+
+def pacientes_modificar(request):
+        return render(request, 'AppCentroSalud/pacientes_modificar.html')
+
+def pacientes_leer(request):
+
+    pacientesInst = Persona.objects.all()
+
+    dir = {"pacientesInst": pacientesInst}
+
+    return render(request, 'AppCentroSalud/pacientes_leer.html',dir)
+
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+#    
+
+
+
+def consultas_insertar(request):
+
+    if request.method == "POST":
+        consultaInst =Consulta (nombre = request.POST['inputNombre'],
+            apellido = request.POST['inputApellido'],
+            email = request.POST['inputEmail'],
+            telefono = request.POST['inputTelefono'],
+            consulta_paciente = request.POST['textareaConsulta'] )
+
+        consultaInst.save()
+        return render(request, "AppCentroSalud/consultas_insertar.html")
     
-def pacientes(request):
+    return render(request, 'AppCentroSalud/consultas_insertar.html')
 
-    # if request.method == "POST":
+def consultas_eliminar(request, id_para_eliminar):
+    consultaEliminar = Consulta.objects.get(nombre=id_para_eliminar)
+    consultaEliminar.delete()
+    consultasInst = Consulta.objects.all()
 
-    #     miFormulario = PacientesFormulario(request.POST)
+    dir = {"consultasInst": consultasInst}
 
-    #     if miFormulario.is_valid():
-    #         informacion = miFormulario.cleaned_data
-           
+    return render(request, 'AppCentroSalud/consultas_leer.html',dir)
 
-    #         datos = Pacientes(
-    #             nombre = informacion["nombre"],
-    #             apellido = informacion["apellido"],
-    #             documento = informacion["documento"],
-    #             email = informacion["email"],
-    #             telefono = informacion["telefono"]
-    #         )
-    #         datos.save()
-    #         return render(request, 'AppCentroSalud/pacientes.html')
-            
-            
-    # else:
-    #     miFormulario = PacientesFormulario()
+def consultas_modificar(request):
+    return render(request, 'AppCentroSalud/consultas_modificar.html')
 
-        #return render(request, 'AppCentroSalud/pacientes.html',{"miFormulario":miFormulario})
-        return render(request, 'AppCentroSalud/pacientes.html')
+def consultas_leer(request):
+    consultasInst = Consulta.objects.all()
 
+    dir = {"consultasInst": consultasInst}
 
-def consultas(request):
-
-    # if request.method == "POST":
-
-    #     miFormulario = ConsultaFormulario(request.POST)
-
-    #     if miFormulario.is_valid():
-    #         informacion = miFormulario.cleaned_data
-            
-
-    #         datos = Consulta(
-    #             nombre = informacion["nombre"],
-    #             apellido = informacion["apellido"],
-    #             email = informacion["email"],
-    #             telefono = informacion["telefono"],
-    #             consulta_paciente = informacion["consulta_paciente"]
-    #         )
-    #         datos.save()
-    #         return render(request, 'AppCentroSalud/consultas.html')
-            
-            
-    # else:
-    #     miFormulario = ConsultaFormulario()
-    #     return render(request, 'AppCentroSalud/consultas.html',{"miFormulario":miFormulario})
-    return render(request, 'AppCentroSalud/consultas.html')
+    return render(request, 'AppCentroSalud/consultas_leer.html',dir)
 
 #acerca
 def acerca(request):
