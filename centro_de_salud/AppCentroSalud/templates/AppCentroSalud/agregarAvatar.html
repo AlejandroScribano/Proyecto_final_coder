@@ -1,0 +1,21 @@
+{% extends 'AppCentroSalud/padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+    <h1> AgregarAvatar </h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+
+        {{miFormulario.as_p}}
+
+        <input type="submit" value="Agregar">
+
+    </form>
+
+   
+
+{% endblock %}

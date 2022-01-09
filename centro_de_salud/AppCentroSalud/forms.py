@@ -54,3 +54,7 @@ class UserEditForm(UserCreationForm):
         #saca los mensajes de ayuda
         help_texts = {k:"" for k in fields}
 
+#Formulario agregar avatar
+
+class AvatarFormulario(forms.Form):
+    imagen = forms.ImageField(required=True)

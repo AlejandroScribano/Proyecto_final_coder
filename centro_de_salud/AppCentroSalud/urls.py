@@ -48,4 +48,7 @@ urlpatterns = [
     #path para editar usuario
     path('editarUsuario', views.editarUsuario, name='EditarUsuario'),
 
+    #path para agregar avatar
+    path('agregarAvatar', views.agregarAvatar, name='AgregarAvatar'),
+
 ]
