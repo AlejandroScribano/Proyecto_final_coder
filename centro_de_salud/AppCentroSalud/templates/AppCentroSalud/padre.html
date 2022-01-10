@@ -54,6 +54,7 @@
 							<img src="{{avatar}}" height="20px" width="30px" >
 							<p class="text-decoration-none pl-1" style="color: crimson;">Hola, {{user.username}}</p>
 							<a class="text-decoration-none pl-1" href="{% url 'EditarUsuario' %}" >Editar Usuario</a>
+							<a class="text-decoration-none pl-1" href="{% url 'AgregarAvatar' %}" >Agregar Avatar</a>
 							<a class="text-decoration-none pl-1" href="{% url 'Logout' %}" style="margin-right: 40px;">Logout</a>
 							{% endif %}
 							<!-- Fin de login -->

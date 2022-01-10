@@ -9,9 +9,11 @@ from django.contrib.auth import login,logout,authenticate, update_session_auth_h
 #para decorador
 from django.contrib.auth.decorators import login_required
 
+#para el agregar avatar
+from django.contrib.auth.models import User
 
 from AppCentroSalud.models import Medico, Persona, Consulta, Avatar
-from AppCentroSalud.forms import MedicoFormulario, UserRegisterForm, UserEditForm
+from AppCentroSalud.forms import MedicoFormulario, PacientesFormulario, ConsultaFormulario, UserRegisterForm, UserEditForm, AvatarFormulario
 
 # Create your views here.
 
@@ -228,7 +230,8 @@ def login_request(request):
 
             if user is not None:
                 login(request,user)
-                return render(request, 'AppCentroSalud/index.html', {"mensaje": f"Bienvenido {usuario}"})
+                #return render(request, 'AppCentroSalud/index.html', {"mensaje": f"Bienvenido {usuario}"})
+                return inicio(request) #Llama a la vista de inicio
             else:
                 return render(request, 'AppCentroSalud/index.html', {"mensaje": f"Error, datos incorrectos"})
         
@@ -267,15 +270,15 @@ def editarUsuario(request):
             usuario.password2 = informacion['password2']
             usuario.save()
 
-            return render(request, 'AppCentroSalud/index.html')
+            #return render(request, 'AppCentroSalud/index.html')
+            return inicio(request) #Llama a la vista de inicio
     else:
         miFormulario = UserEditForm(initial={'email':usuario.email})
 
         diccionario = {}
         diccionario["miFormulario"] = miFormulario
         diccionario["usuario"] = usuario
-        #Para mostar avatar
-        
+        #Para mostar avatar       
         cantidadAvatares = 0
         if request.user.is_authenticated:
             avatar = Avatar.objects.filter(user = request.user.id)
@@ -288,3 +291,35 @@ def editarUsuario(request):
 
         return render(request, 'AppCentroSalud/editarUsuario.html',diccionario)
         #return render(request, 'AppCentroSalud/editarUsuario.html', {"miFormulario":miFormulario,"usuario":usuario, "avatar" : avatar[cantidadAvatares-1].imagen.url })
+
+
+#Agregar avatar
+
+@login_required
+def agregarAvatar(request):
+    if request.method == 'POST':
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+        if miFormulario.is_valid():
+            usuario = User.objects.get(username=request.user)
+            avatar = Avatar(user = usuario, imagen = miFormulario.cleaned_data['imagen'])
+            avatar.save()
+
+            #return render (request, 'AppCentroSalud/index.html')
+            return inicio(request) #Llama a la vista de inicio
+            
+    else:
+        miFormulario = AvatarFormulario()
+        diccionario = {}
+        diccionario["miFormulario"] = miFormulario
+
+        #Para mostar avatar       
+        cantidadAvatares = 0
+        if request.user.is_authenticated:
+            avatar = Avatar.objects.filter(user = request.user.id)
+            for a in avatar:
+                cantidadAvatares = cantidadAvatares + 1
+            if cantidadAvatares > 0:
+                diccionario["avatar"] = avatar[cantidadAvatares-1].imagen.url
+
+        return render(request, 'AppCentroSalud/agregarAvatar.html', diccionario)
+        #return render(request, 'AppCentroSalud/agregarAvatar.html', {"miFormulario": miFormulario})
