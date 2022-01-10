@@ -6,18 +6,18 @@ from django.forms.forms import Form
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-class CuerpoMedicoFormulario(forms.Form):
-    nombre = forms.CharField(max_length=30)
+class MedicoFormulario(forms.Form):
+    nombre = forms.CharField(max_length=35)
     apellido = forms.CharField(max_length=30)
-    especialidad = forms.CharField(max_length=30)
-    dia_hora_atencion = forms.CharField(max_length=90)
+    documento = forms.CharField(max_length=15)
     email = forms.EmailField()
     telefono = forms.CharField(max_length=15)
+    especialidad = forms.CharField(max_length=15)
 
 class PacientesFormulario(forms.Form):
     nombre = forms.CharField(max_length=30)
     apellido = forms.CharField(max_length=30)
-    documento = forms.IntegerField()
+    documento = forms.CharField(max_length=15)
     email = forms.EmailField()
     telefono = forms.CharField(max_length=15)
 

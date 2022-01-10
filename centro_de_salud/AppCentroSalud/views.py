@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from AppCentroSalud.models import Medico, Persona, Consulta, Avatar
-from AppCentroSalud.forms import CuerpoMedicoFormulario, PacientesFormulario, ConsultaFormulario, UserRegisterForm, UserEditForm
+from AppCentroSalud.forms import MedicoFormulario, UserRegisterForm, UserEditForm
 
 # Create your views here.
 
@@ -59,8 +59,34 @@ def doctores_eliminar(request, id_para_eliminar):
 
     return render(request, 'AppCentroSalud/doctores_leer.html',dir)
 
-def doctores_modificar(request):
-    return render(request, 'AppCentroSalud/doctores_modificar.html')
+def doctores_modificar(request, id_para_editar):
+    doctorModificar = Medico.objects.get(documento=id_para_editar)
+
+    if request.method == "POST":
+
+        print(request.POST)
+
+        miFormulario =MedicoFormulario(request.POST)
+
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            doctorModificar.nombre = informacion["nombre"],
+            doctorModificar.apellido = informacion["apellido"],
+            doctorModificar.documento = informacion["documento"],
+            doctorModificar.email = informacion["email"],
+            doctorModificar.telefono = informacion["telefono"],
+            doctorModificar.especialidad = informacion["especialidad"]
+
+
+
+            
+            doctorModificar.save()
+        return render(request, "AppCentroSalud/index.html")
+    else:
+        miFormulario = MedicoFormulario (initial={"nombre":doctorModificar.nombre,"apellido":doctorModificar.apellido,"documento":doctorModificar.documento,"email":doctorModificar.email,"telefono":doctorModificar.telefono,"especialidad":doctorModificar.especialidad})
+
+    return render(request, 'AppCentroSalud/doctores_modificar.html',{"miFormulario":miFormulario,"id_para_editar":id_para_editar})
+        
 
 def doctores_leer(request):
 

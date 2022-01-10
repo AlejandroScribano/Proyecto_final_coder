@@ -1,38 +1,55 @@
 {% extends 'AppCentroSalud/padre.html' %} {% load static %} {% block contenidoQueCambia %}
 
-<h1>esta es la pagina de Doctores</h1>
-<div class="container">
-	<form action="{% url 'doctoresModificar' %}" method="POST">
+<h1>Modificar Doctores</h1>
+
+
+<form action=" " method="POST">{% csrf_token %}
+	<!--
+	<p>Direccion: <input type="text"  name="direccion">    </p>
+	<p>Año: <input type="number"  name="anioFund">    </p>
+	-->
+	<table>
+
+	{{  miFormulario.as_table    }}
+
+	</table>
+
+	<input type="submit" value="EDITAAAR!!!!">
+</form>
+
+<!-- <div class="container">
+	<form action="" method="POST">
 		{% csrf_token %}
+
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="inputNombre">Nombre</label>
-				<input type="email" class="form-control" id="inputNombre" required />
+				<input type="text" class="form-control" id="inputNombre" value="{{doctorModificar.nombre}}" required />
 			</div>
 			<div class="form-group col-md-6">
 				<label for="inputApellido">Apellido</label>
-				<input type="text" class="form-control" id="inputApellido" required />
+				<input type="text" class="form-control" id="inputApellido" value="{{doctorModificar.apellido}}" required />
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-4">
 				<label for="inputDocumento">Documento</label>
-				<input type="text" class="form-control" id="inputDocumento" placeholder="123456789" required />
+				<input type="text" class="form-control" id="inputDocumento" placeholder="123456789" value="{{doctorModificar.documento}}" required />
 			</div>
 			<div class="form-group col-md-8">
 				<label for="inputEmail">E-Mail</label>
-				<input type="email" class="form-control" id="inputEmail" placeholder="algunemail@algunproveedor.com" required />
+				<input type="email" class="form-control" id="inputEmail" placeholder="algunemail@algunproveedor.com" value="{{doctorModificar.email}}" required />
 			</div>
 		</div>
 
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="inputCity">Telefono</label>
-				<input type="text" class="form-control" id="inputTelefono" />
+				<input type="text" class="form-control" id="inputTelefono" value="{{doctorModificar.telefono}}" />
 			</div>
 			<div class="form-group col-md-6">
 				<label for="selectEspecialidad">Especialidad</label>
-				<select id="selectEspecialidad" class="form-control">
+				<select id="selectEspecialidad" class="form-control" >
 					<option value="1">Cardiologia</option>
 					<option value="2">Gastroenterologia</option>
 					<option value="3">Faringolaringologia</option>
@@ -42,7 +59,7 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Agregar</button>
+		<button type="submit" class="btn btn-primary">Agregar</button> -->
 
 		<!-- {% csrf_token %}
 		<table>
@@ -51,5 +68,4 @@
 		<input type="submit" value="Enviar" /> -->
 	</form>
 </div>
-
 {% endblock %}

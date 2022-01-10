@@ -6,6 +6,7 @@
 	<div class="row mt-3">
 		<li>{{j}}</li>
 		<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="{% url 'doctoresEliminar' j.documento %}">Eliminar Doctor</a>
+		<a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="{% url 'doctoresModificar' j.documento %}">Modificar Doctor</a>
 	</div>
 	{% endfor %}
 	<div class="row mt-3">

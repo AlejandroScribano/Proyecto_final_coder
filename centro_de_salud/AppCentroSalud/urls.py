@@ -11,7 +11,7 @@ urlpatterns = [
 
     path('doctores_eliminar/<id_para_eliminar>',views.doctores_eliminar, name="doctoresEliminar"),
 
-    path('doctores_modificar',views.doctores_modificar, name="doctoresModificar"),
+    path('doctores_modificar/<id_para_editar>',views.doctores_modificar, name="doctoresModificar"),
 
     path('doctores_leer',views.doctores_leer, name="doctoresLeer"), 
 
@@ -20,7 +20,7 @@ urlpatterns = [
 
     path('pacientes_eliminar/<id_para_eliminar>',views.pacientes_eliminar, name="pacientesEliminar"),
 
-    path('pacientes_modificar',views.pacientes_modificar, name="pacientesModificar"),
+    path('pacientes_modificar/<id_para_editar>',views.pacientes_modificar, name="pacientesModificar"),
 
     path('pacientes_leer',views.pacientes_leer, name="pacientesLeer"),
 

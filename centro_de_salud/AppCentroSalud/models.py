@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Persona(models.Model):
  nombre = models.CharField(max_length=30)
  apellido = models.CharField(max_length=30)
- documento = models.IntegerField(blank=True, null=True)
+ documento = models.CharField(max_length=15)
  email = models.EmailField()
  telefono = models.CharField(max_length=15)
  def __str__(self):
@@ -18,12 +18,12 @@ class Persona(models.Model):
 class Medico(models.Model):
  nombre = models.CharField(max_length=35)
  apellido = models.CharField(max_length=30)
- documento = models.IntegerField(blank=True, null=True)
+ documento = models.CharField(max_length=15)
  email = models.EmailField()
  telefono = models.CharField(max_length=15)
  especialidad = models.CharField(max_length=15)
  def __str__(self):
-  return f"NOMBRE: {self.nombre} APELLIDO: {self.apellido} DOCUMENTO: {self.documento} EMAIL: {self.email} TELEFONO: {self.telefono} ESPECIALIDAD: {self.especialidad}"
+  return f"{self.nombre},{self.apellido}, {self.documento}, {self.email}, {self.telefono}, {self.especialidad}"
 
 class Consulta(models.Model):
   nombre = models.CharField(max_length=30)
