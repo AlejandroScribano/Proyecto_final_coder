@@ -2,6 +2,10 @@
 Proyecto final del curso de Python - CoderHouse
 Integrantes:
   - Andrés Salas Zumaran
+    -CRUD
+    -Estilo y desarrollo HTML
+    -templates
+    -video CRUD
 
   - Alejandro Scribano
     -Creación de proyecto
