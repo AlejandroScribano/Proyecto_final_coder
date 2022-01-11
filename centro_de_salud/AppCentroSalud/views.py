@@ -12,6 +12,12 @@ from django.contrib.auth.decorators import login_required
 #para el agregar avatar
 from django.contrib.auth.models import User
 
+from django.views.generic import ListView
+
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import  CreateView, UpdateView, DeleteView
+
+
 from AppCentroSalud.models import Medico, Persona, Consulta, Avatar
 from AppCentroSalud.forms import MedicoFormulario, PacientesFormulario, ConsultaFormulario, UserRegisterForm, UserEditForm, AvatarFormulario
 
@@ -72,11 +78,11 @@ def doctores_modificar(request, id_para_editar):
 
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            doctorModificar.nombre = informacion["nombre"],
-            doctorModificar.apellido = informacion["apellido"],
-            doctorModificar.documento = informacion["documento"],
-            doctorModificar.email = informacion["email"],
-            doctorModificar.telefono = informacion["telefono"],
+            doctorModificar.nombre = informacion["nombre"]
+            doctorModificar.apellido = informacion["apellido"]
+            doctorModificar.documento = informacion["documento"]
+            doctorModificar.email = informacion["email"]
+            doctorModificar.telefono = informacion["telefono"]
             doctorModificar.especialidad = informacion["especialidad"]
 
 
@@ -109,44 +115,44 @@ def doctores_leer(request):
 # 
 # 
 # 
+#
 # 
 # 
 # 
 # 
 # 
-#    
-def pacientes_insertar(request):
+#
 
-    if request.method == "POST":
-        personaInst =Persona (nombre = request.POST['inputNombre'],
-            apellido = request.POST['inputApellido'],
-            documento = request.POST['inputDocumento'],
-            email = request.POST['inputEmail'],
-            telefono = request.POST['inputTelefono'])
-        personaInst.save()
-        return render(request, "AppCentroSalud/pacientes_insertar.html")
+class PersonaLista(ListView):
+    model = Persona
+    template_name = "AppCentroSalud/pacientes_leer.html"
 
-    return render(request, 'AppCentroSalud/pacientes_insertar.html')
+#Detalle - SUPER Leer - Buscar!!!!!
+class PersonaDetalle(DetailView):
+    
+    model = Persona
+    template_name = "AppCentroSalud/pacientes_detalle.html"
+    
+#Crear elementos
+class PersonaInsertar(CreateView):
+    
+    model = Persona
+    success_url = "../pacientes_leer"  #AppCoder/template/AppCoder/editar
+    fields = ["nombre", "apellido", "documento", "email", "telefono" ]
+    
+#modificar!!!!!!!!!!!  
+class PersonaModificar(UpdateView):
+    
+    model = Persona
+    success_url = "../pacientes_leer"
+    fields = ["nombre", "apellido", "documento", "email", "telefono" ]
+  
+#Borrar   
+class PersonaEliminar(DeleteView):
+    
+    model = Persona
+    success_url = "../pacientes_leer"
 
-def pacientes_eliminar(request, id_para_eliminar):
-    pacienteEliminar = Persona.objects.get(documento=id_para_eliminar)
-    pacienteEliminar.delete()
-    pacientesInst = Persona.objects.all()
-
-    dir = {"pacientesInst": pacientesInst}
-
-    return render(request, 'AppCentroSalud/pacientes_leer.html',dir)
-
-def pacientes_modificar(request):
-        return render(request, 'AppCentroSalud/pacientes_modificar.html')
-
-def pacientes_leer(request):
-
-    pacientesInst = Persona.objects.all()
-
-    dir = {"pacientesInst": pacientesInst}
-
-    return render(request, 'AppCentroSalud/pacientes_leer.html',dir)
 
 # 
 # 

@@ -16,13 +16,13 @@ urlpatterns = [
     path('doctores_leer',views.doctores_leer, name="doctoresLeer"), 
 
     #path pacientes
-    path('pacientes_insertar',views.pacientes_insertar, name="pacientesInsertar"),
 
-    path('pacientes_eliminar/<id_para_eliminar>',views.pacientes_eliminar, name="pacientesEliminar"),
+    path('pacientes_leer',views.PersonaLista.as_view(), name="pacientesLeer"),
+    path(r'^(?P<pk>\d+)$', views.PersonaDetalle.as_view(), name='pacienteDetalle'),
 
-    path('pacientes_modificar/<id_para_editar>',views.pacientes_modificar, name="pacientesModificar"),
-
-    path('pacientes_leer',views.pacientes_leer, name="pacientesLeer"),
+    path(r'^nuevo$', views.PersonaInsertar.as_view(), name='pacienteInsertar'),
+    path(r'^editar/(?P<pk>\d+)$', views.PersonaModificar.as_view(), name='pacienteModificar'),
+    path(r'^borrar/(?P<pk>\d+)$', views.PersonaEliminar.as_view(), name='pacienteEliminar'),
 
     #path consultas
     path('consultas_insertar',views.consultas_insertar, name="consultasInsertar"),
