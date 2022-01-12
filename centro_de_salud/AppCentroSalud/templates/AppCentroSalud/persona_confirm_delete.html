@@ -1,0 +1,12 @@
+{% extends 'AppCentroSalud/padre.html' %} {% load static %} {% block contenidoQueCambia %}
+
+<form method="POST">
+	{% csrf_token %} 
+	
+	¿estas seguro de borrar a "{{ object }}" ?
+	{{form.as_p}}
+
+	<input type="submit" value="Enviar" />
+</form>
+
+{% endblock %}

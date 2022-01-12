@@ -137,7 +137,7 @@ class PersonaDetalle(DetailView):
 class PersonaInsertar(CreateView):
     
     model = Persona
-    success_url = "../pacientes_leer"  #AppCoder/template/AppCoder/editar
+    success_url = "pacientes_leer"  #AppCoder/template/AppCoder/editar
     fields = ["nombre", "apellido", "documento", "email", "telefono" ]
     
 #modificar!!!!!!!!!!!  
